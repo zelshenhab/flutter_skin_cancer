@@ -10,7 +10,9 @@ class ImagePickerUtils {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Select Image"),
+          title: Text(
+            "Select Image",
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[

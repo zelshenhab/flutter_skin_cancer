@@ -9,8 +9,9 @@ class SkinCancerDetectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
-          child: SkinCancerDetectionAppbar()),
+        preferredSize: Size.fromHeight(60.0),
+        child: SkinCancerDetectionAppbar(),
+      ),
       body: SkinCancerDetectionBody(),
     );
   }

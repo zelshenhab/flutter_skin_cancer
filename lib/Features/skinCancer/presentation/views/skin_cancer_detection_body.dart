@@ -70,7 +70,7 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
                 );
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                padding: EdgeInsets.symmetric(horizontal: 42, vertical: 12),
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(255, 255, 255, 1), // White background
                   borderRadius: BorderRadius.circular(24),
@@ -79,7 +79,7 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
                       color: Color.fromRGBO(0, 0, 0, 0.2),
                       spreadRadius: 1,
                       blurRadius: 4,
-                      offset: Offset(0, 2),
+                      offset: Offset(0, 5),
                     ),
                   ],
                 ),
