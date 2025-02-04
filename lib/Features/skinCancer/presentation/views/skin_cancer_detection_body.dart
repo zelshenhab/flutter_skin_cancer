@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'image_picker_utils.dart'; // Import the utility class
 
 class SkinCancerDetectionBody extends StatefulWidget {
@@ -22,24 +22,59 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source);
 
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        _showResponseBox = true;
-        _responseText = "Image selected! Processing..."; // Simulate a response
-      } else {
-        if (kDebugMode) {
-          print('No image selected.');
-        }
-      }
-    });
+    if (pickedFile != null) {
+      File? croppedFile = await _cropImage(File(pickedFile.path));
 
-    // Simulate processing delay
-    await Future.delayed(Duration(seconds: 2));
-    setState(() {
-      _responseText =
-          "Analysis complete: No issues detected."; // Simulate a final response
-    });
+      setState(() {
+        if (croppedFile != null) {
+          _image = croppedFile;
+          _showResponseBox = true;
+          _responseText =
+              "Image selected! Processing..."; // Simulate a response
+        }
+      });
+
+      // Simulate processing delay
+      await Future.delayed(Duration(seconds: 2));
+      setState(() {
+        _responseText =
+            "Analysis complete: No issues detected."; // Simulate a final response
+      });
+    } else {
+      if (kDebugMode) {
+        print('No image selected.');
+      }
+    }
+  }
+
+  Future<File?> _cropImage(File imageFile) async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: imageFile.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9,
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: 'Crop Image',
+          toolbarColor: Colors.deepPurple,
+          toolbarWidgetColor: Colors.white,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+        ),
+        IOSUiSettings(
+          title: 'Crop Image',
+        ),
+      ],
+    );
+
+    if (croppedFile != null) {
+      return File(croppedFile.path);
+    }
+    return null;
   }
 
   @override
