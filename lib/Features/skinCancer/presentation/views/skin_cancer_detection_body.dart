@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'image_picker_utils.dart'; // Import the utility class
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:image/image.dart' as img;
 
 class SkinCancerDetectionBody extends StatefulWidget {
   const SkinCancerDetectionBody({super.key});
@@ -25,21 +27,16 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
     if (pickedFile != null) {
       File? croppedFile = await _cropImage(File(pickedFile.path));
 
-      setState(() {
-        if (croppedFile != null) {
+      if (croppedFile != null) {
+        setState(() {
           _image = croppedFile;
           _showResponseBox = true;
-          _responseText =
-              "Image selected! Processing..."; // Simulate a response
-        }
-      });
+          _responseText = "Image selected! Processing...";
+        });
 
-      // Simulate processing delay
-      await Future.delayed(Duration(seconds: 2));
-      setState(() {
-        _responseText =
-            "Analysis complete: No issues detected."; // Simulate a final response
-      });
+        // Send image to Flask API
+        await _sendImageToServer(croppedFile);
+      }
     } else {
       if (kDebugMode) {
         print('No image selected.');
@@ -48,33 +45,83 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
   }
 
   Future<File?> _cropImage(File imageFile) async {
+    // Crop the image using the ImageCropper package
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: imageFile.path,
       aspectRatioPresets: [
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio16x9,
+        CropAspectRatioPreset.square, // Square aspect ratio
+        CropAspectRatioPreset.ratio3x2, // 3:2 aspect ratio
+        CropAspectRatioPreset.original, // Original aspect ratio
+        CropAspectRatioPreset.ratio4x3, // 4:3 aspect ratio
+        CropAspectRatioPreset.ratio16x9, // 16:9 aspect ratio
       ],
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Crop Image',
-          toolbarColor: Colors.deepPurple,
-          toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.original,
-          lockAspectRatio: false,
+          toolbarTitle: 'Crop Image', // Title for the toolbar
+          toolbarColor: Colors.deepPurple, // Toolbar color
+          toolbarWidgetColor: Colors.white, // Toolbar widget color
+          initAspectRatio:
+              CropAspectRatioPreset.original, // Initial aspect ratio
+          lockAspectRatio: false, // Allow custom aspect ratio
         ),
         IOSUiSettings(
-          title: 'Crop Image',
+          title: 'Crop Image', // Title for iOS
         ),
       ],
     );
 
+    // If image cropping is successful
     if (croppedFile != null) {
-      return File(croppedFile.path);
+      // Load the cropped image using the 'image' package
+      final img.Image image =
+          img.decodeImage(File(croppedFile.path).readAsBytesSync())!;
+
+      // Resize the image to 224x224 pixels
+      img.Image resizedImage = img.copyResize(image, width: 224, height: 224);
+
+      // Save the resized image as a PNG file
+      final resizedImageFile = File('${croppedFile.path}_resized.png')
+        ..writeAsBytesSync(img.encodePng(resizedImage));
+
+      // Return the resized image file
+      return resizedImageFile;
     }
+    // Return null if cropping was not successful
     return null;
+  }
+
+  Future<void> _sendImageToServer(File imageFile) async {
+    var uri = Uri.parse(
+        "http://10.0.2.2:5000/predict"); // Use this when working with Android Emulator
+    var request = http.MultipartRequest('POST', uri);
+    request.files
+        .add(await http.MultipartFile.fromPath('image', imageFile.path));
+
+    try {
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        var responseData = await response.stream.bytesToString();
+        var jsonResponse = jsonDecode(responseData);
+
+        setState(() {
+          if (jsonResponse['classification'] == "Malignant") {
+            _responseText =
+                "⚠️ Malignant - Please consult a doctor immediately!";
+          } else {
+            _responseText = "✅ Benign - No risk detected.";
+          }
+        });
+      } else {
+        setState(() {
+          _responseText = "❌ Error: ${response.reasonPhrase}";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _responseText =
+            "❌ Failed to connect to the server. Make sure it is running.";
+      });
+    }
   }
 
   @override
@@ -84,48 +131,62 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _image == null
-              ? Text(
+              ? const Text(
                   'No image selected.',
                   style: TextStyle(fontSize: 24),
                 )
               : Image.file(_image!),
-          SizedBox(height: 30),
-          AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            margin: EdgeInsets.only(bottom: _showResponseBox ? 50 : 0),
-            child: GestureDetector(
-              onTap: () {
-                // Use the utility class to show the dialog
-                ImagePickerUtils.showImageSourceDialog(
-                  context: context,
-                  onImageSourceSelected: (source) {
-                    _pickImage(
-                        source); // Call _pickImage with the selected source
-                  },
-                );
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 42, vertical: 12),
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(255, 255, 255, 1), // White background
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.2),
-                      spreadRadius: 1,
-                      blurRadius: 4,
-                      offset: Offset(0, 5),
+          const SizedBox(height: 30),
+          GestureDetector(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SafeArea(
+                    child: Wrap(
+                      children: <Widget>[
+                        ListTile(
+                          leading: const Icon(Icons.photo_library),
+                          title: const Text('Gallery'),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _pickImage(ImageSource.gallery);
+                          },
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.camera_alt),
+                          title: const Text('Camera'),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _pickImage(ImageSource.camera);
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: Text(
-                  'Select Image',
-                  style: TextStyle(
-                    color:
-                        const Color.fromARGB(255, 134, 50, 219), // Purple text
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                  );
+                },
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.2),
+                    spreadRadius: 1,
+                    blurRadius: 4,
+                    offset: Offset(0, 5),
                   ),
+                ],
+              ),
+              child: const Text(
+                'Select Image',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 134, 50, 219),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
@@ -133,16 +194,16 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
           Visibility(
             visible: _showResponseBox,
             child: AnimatedContainer(
-              duration: Duration(milliseconds: 300),
-              margin: EdgeInsets.only(top: 20),
-              padding: EdgeInsets.all(16),
+              duration: const Duration(milliseconds: 300),
+              margin: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 _responseText,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ),
           ),
