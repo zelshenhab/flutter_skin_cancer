@@ -92,7 +92,7 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
 
   Future<void> _sendImageToServer(File imageFile) async {
     var uri = Uri.parse(
-        "http://10.0.2.2:5000/predict"); // Use this when working with Android Emulator
+        "http://10.0.2.2:5000/predict"); // Use this for Android Emulator
     var request = http.MultipartRequest('POST', uri);
     request.files
         .add(await http.MultipartFile.fromPath('image', imageFile.path));
@@ -103,13 +103,17 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
         var responseData = await response.stream.bytesToString();
         var jsonResponse = jsonDecode(responseData);
 
+        // Extract classification and confidence
+        String classification = jsonResponse['classification'] ?? "Unknown";
+        double confidence = jsonResponse['confidence'] ?? 0.0; // Default to 0.0
+
         setState(() {
-          if (jsonResponse['classification'] == "Malignant") {
-            _responseText =
-                "⚠️ Malignant - Please consult a doctor immediately!";
-          } else {
-            _responseText = "✅ Benign - No risk detected.";
-          }
+          _responseText = classification == "Malignant"
+              ? "⚠️ Malignant - Please consult a doctor immediately!"
+              : "✅ Benign - No risk detected.";
+
+          _responseText +=
+              "\nConfidence: ${(confidence * 100).toStringAsFixed(2)}%"; // Display confidence percentage
         });
       } else {
         setState(() {
