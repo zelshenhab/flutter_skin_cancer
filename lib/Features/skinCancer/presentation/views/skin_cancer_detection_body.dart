@@ -48,24 +48,16 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
     // Crop the image using the ImageCropper package
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: imageFile.path,
-      aspectRatioPresets: [
-        CropAspectRatioPreset.square, // Square aspect ratio
-        CropAspectRatioPreset.ratio3x2, // 3:2 aspect ratio
-        CropAspectRatioPreset.original, // Original aspect ratio
-        CropAspectRatioPreset.ratio4x3, // 4:3 aspect ratio
-        CropAspectRatioPreset.ratio16x9, // 16:9 aspect ratio
-      ],
+      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Crop Image', // Title for the toolbar
-          toolbarColor: Colors.deepPurple, // Toolbar color
-          toolbarWidgetColor: Colors.white, // Toolbar widget color
-          initAspectRatio:
-              CropAspectRatioPreset.original, // Initial aspect ratio
-          lockAspectRatio: false, // Allow custom aspect ratio
+          toolbarTitle: 'Crop Image',
+          toolbarColor: Colors.deepPurple,
+          toolbarWidgetColor: Colors.white,
+          lockAspectRatio: false,
         ),
         IOSUiSettings(
-          title: 'Crop Image', // Title for iOS
+          title: 'Crop Image',
         ),
       ],
     );
