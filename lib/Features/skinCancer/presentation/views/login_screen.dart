@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_skin_cancer/Features/skinCancer/presentation/views/forget_password.dart';
 import 'package:flutter_skin_cancer/Features/skinCancer/presentation/views/sign_up_screen.dart';
 import 'package:flutter_skin_cancer/Features/skinCancer/presentation/views/skin_cancer_detection_view.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_skin_cancer/core/localization/language_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -68,20 +70,35 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // عنوان الصفحة مع الترجمة حسب اللغة
                 Text(
-                  'Welcome Back',
+                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
+                      ? 'مرحباً بعودتك'
+                      : 'Welcome Back',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 5),
-                Text('Enter your credential to login',
-                    style: TextStyle(fontSize: 16, color: Colors.grey)),
+                Text(
+                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
+                      ? 'أدخل بياناتك لتسجيل الدخول'
+                      : 'Enter your credential to login',
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
                 SizedBox(height: 20),
                 _buildTextField(
                   emailController,
-                  'Email',
+                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
+                      ? 'البريد الإلكتروني'
+                      : 'Email',
                   Icons.email,
                 ),
-                _buildTextField(passwordController, 'Password', Icons.lock,
+                _buildTextField(
+                    passwordController,
+                    context.watch<LanguageProvider>().locale.languageCode ==
+                            'ar'
+                        ? 'كلمة المرور'
+                        : 'Password',
+                    Icons.lock,
                     isPassword: true),
                 SizedBox(height: 20),
                 ElevatedButton(
@@ -103,7 +120,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Colors.white,
                           ),
                         )
-                      : Text('Login',
+                      : Text(
+                          context
+                                      .watch<LanguageProvider>()
+                                      .locale
+                                      .languageCode ==
+                                  'ar'
+                              ? 'تسجيل الدخول'
+                              : 'Login',
                           style: TextStyle(color: Colors.white, fontSize: 16)),
                 ),
                 SizedBox(height: 10),
@@ -115,14 +139,24 @@ class _LoginScreenState extends State<LoginScreen> {
                           builder: (context) => ForgetPasswordScreen()),
                     );
                   },
-                  child: Text('Forgot password?',
-                      style: TextStyle(color: Colors.deepPurple)),
+                  child: Text(
+                    context.watch<LanguageProvider>().locale.languageCode ==
+                            'ar'
+                        ? 'هل نسيت كلمة المرور؟'
+                        : 'Forgot password?',
+                    style: TextStyle(color: Colors.deepPurple),
+                  ),
                 ),
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account? "),
+                    Text(
+                      context.watch<LanguageProvider>().locale.languageCode ==
+                              'ar'
+                          ? "ليس لديك حساب؟ "
+                          : "Don't have an account? ",
+                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -131,10 +165,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               builder: (context) => SignUpScreen()),
                         );
                       },
-                      child: Text("Sign Up",
-                          style: TextStyle(
-                              color: Colors.deepPurple,
-                              fontWeight: FontWeight.bold)),
+                      child: Text(
+                        context.watch<LanguageProvider>().locale.languageCode ==
+                                'ar'
+                            ? "إنشاء حساب"
+                            : "Sign Up",
+                        style: TextStyle(
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),

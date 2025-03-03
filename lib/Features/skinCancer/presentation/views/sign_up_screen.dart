@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_skin_cancer/Features/skinCancer/presentation/views/skin_cancer_detection_view.dart';
+import 'package:flutter_skin_cancer/core/localization/language_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'login_screen.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -99,19 +101,65 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Sign Up',
-                    style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                // زر تغيير اللغة هنا فوق العنوان
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Consumer<LanguageProvider>(
+                        builder: (context, languageProvider, child) {
+                      return IconButton(
+                        icon: Icon(Icons.language),
+                        onPressed: () {
+                          languageProvider.toggleLanguage();
+                        },
+                      );
+                    }),
+                  ],
+                ),
+                // عنوان التسجيل
+                Text(
+                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
+                      ? 'تسجيل الحساب'
+                      : 'Sign Up',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
                 SizedBox(height: 5),
-                Text('Create your account',
-                    style: TextStyle(fontSize: 16, color: Colors.grey)),
+                Text(
+                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
+                      ? 'أنشئ حسابك'
+                      : 'Create your account',
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
                 SizedBox(height: 20),
-                _buildTextField(usernameController, 'Username', Icons.person),
-                _buildTextField(emailController, 'Email', Icons.email),
-                _buildTextField(passwordController, 'Password', Icons.lock,
+                _buildTextField(
+                    usernameController,
+                    context.watch<LanguageProvider>().locale.languageCode ==
+                            'ar'
+                        ? 'اسم المستخدم'
+                        : 'Username',
+                    Icons.person),
+                _buildTextField(
+                    emailController,
+                    context.watch<LanguageProvider>().locale.languageCode ==
+                            'ar'
+                        ? 'البريد الإلكتروني'
+                        : 'Email',
+                    Icons.email),
+                _buildTextField(
+                    passwordController,
+                    context.watch<LanguageProvider>().locale.languageCode ==
+                            'ar'
+                        ? 'كلمة المرور'
+                        : 'Password',
+                    Icons.lock,
                     isPassword: true),
                 _buildTextField(
-                    confirmPasswordController, 'Confirm Password', Icons.lock,
+                    confirmPasswordController,
+                    context.watch<LanguageProvider>().locale.languageCode ==
+                            'ar'
+                        ? 'تأكيد كلمة المرور'
+                        : 'Confirm Password',
+                    Icons.lock,
                     isPassword: true),
                 SizedBox(height: 20),
                 ElevatedButton(
@@ -125,11 +173,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onPressed: isLoading ? null : handleSignUp,
                   child: isLoading
                       ? CircularProgressIndicator(color: Colors.white)
-                      : Text('Sign Up',
+                      : Text(
+                          context
+                                      .watch<LanguageProvider>()
+                                      .locale
+                                      .languageCode ==
+                                  'ar'
+                              ? 'تسجيل'
+                              : 'Sign Up',
                           style: TextStyle(color: Colors.white, fontSize: 16)),
                 ),
                 SizedBox(height: 10),
-                Text("Or"),
+                Text(context.watch<LanguageProvider>().locale.languageCode ==
+                        'ar'
+                    ? "أو"
+                    : "Or"),
                 SizedBox(height: 10),
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
@@ -140,14 +198,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onPressed: () {
                     signInWithGoogle(context);
                   },
-                  child: Text('Sign In with Google',
+                  child: Text(
+                      context.watch<LanguageProvider>().locale.languageCode ==
+                              'ar'
+                          ? 'تسجيل الدخول باستخدام جوجل'
+                          : 'Sign In with Google',
                       style: TextStyle(color: Colors.deepPurple, fontSize: 16)),
                 ),
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have an account? "),
+                    Text(
+                        context.watch<LanguageProvider>().locale.languageCode ==
+                                'ar'
+                            ? "هل لديك حساب؟ "
+                            : "Already have an account? "),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushReplacement(
@@ -156,10 +222,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               builder: (context) => LoginScreen()),
                         );
                       },
-                      child: Text("Login",
-                          style: TextStyle(
-                              color: Colors.deepPurple,
-                              fontWeight: FontWeight.bold)),
+                      child: Text(
+                        context.watch<LanguageProvider>().locale.languageCode ==
+                                'ar'
+                            ? "دخول"
+                            : "Login",
+                        style: TextStyle(
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),

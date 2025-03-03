@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_skin_cancer/Features/skinCancer/presentation/views/sign_up_screen.dart';
 import 'package:flutter_skin_cancer/Features/skinCancer/presentation/views/skin_cancer_detection_view.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_skin_cancer/core/localization/language_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,16 +40,38 @@ class _SkinCancerState extends State<SkinCancer> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SignUpScreen(),
-      routes: {
-        'skinCancerDetectionView': (context) => SkinCancerDetectionView(),
-      },
+    return ChangeNotifierProvider<LanguageProvider>(
+      create: (context) => LanguageProvider(),
+      child: Consumer<LanguageProvider>(
+        builder: (context, languageProvider, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            locale: languageProvider.locale,
+            supportedLocales: [
+              Locale('en', 'US'),
+              Locale('ar', 'AE'),
+            ],
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            home: Directionality(
+              // تحديد اتجاه النص بناءً على اللغة
+              textDirection: languageProvider.locale.languageCode == 'ar'
+                  ? TextDirection.rtl // العربية من اليمين لليسار
+                  : TextDirection.ltr, // الإنجليزية من اليسار لليمين
+              child: SignUpScreen(),
+            ),
+            routes: {
+              'skinCancerDetectionView': (context) => SkinCancerDetectionView(),
+            },
+          );
+        },
+      ),
     );
   }
 }
-
 
 
 //  home: FirebaseAuth.instance.currentUser == null

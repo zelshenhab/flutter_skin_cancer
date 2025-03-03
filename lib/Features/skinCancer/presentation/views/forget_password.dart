@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_skin_cancer/core/localization/language_provider.dart';
+import 'package:provider/provider.dart'; // Don't forget to import provider
 
 class ForgetPasswordScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -16,18 +18,31 @@ class ForgetPasswordScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Text for forgot password, language dependent
                 Text(
-                  'Forgot Password?',
+                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
+                      ? 'هل نسيت كلمة المرور؟'
+                      : 'Forgot password?',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 5),
+                // Text for instruction, language dependent
                 Text(
-                  'Enter your email to reset your password',
+                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
+                      ? 'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور'
+                      : 'Enter your email to reset your password',
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20),
-                _buildTextField(emailController, 'Email', Icons.email),
+                // TextField for email with dynamic hintText
+                _buildTextField(
+                  emailController,
+                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
+                      ? 'البريد الإلكتروني'
+                      : 'Email',
+                  Icons.email,
+                ),
                 SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -40,7 +55,16 @@ class ForgetPasswordScreen extends StatelessWidget {
                   onPressed: () async {
                     if (emailController.text == '') {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Please Enter Your Email')),
+                        SnackBar(
+                          content: Text(Provider.of<LanguageProvider>(context,
+                                          listen: false)
+                                      .locale
+                                      .languageCode ==
+                                  'ar'
+                              ? 'من فضلك أدخل بريدك الإلكتروني'
+                              : 'Please Enter Your Email'),
+                          backgroundColor: Colors.red,
+                        ),
                       );
                       return;
                     }
@@ -48,30 +72,69 @@ class ForgetPasswordScreen extends StatelessWidget {
                       await FirebaseAuth.instance
                           .sendPasswordResetEmail(email: emailController.text);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Reset link sent to email')),
+                        SnackBar(
+                          content: Text(Provider.of<LanguageProvider>(context,
+                                          listen: false)
+                                      .locale
+                                      .languageCode ==
+                                  'ar'
+                              ? 'تم إرسال رابط إعادة التعيين إلى البريد الإلكتروني'
+                              : 'Reset link sent to email'),
+                          backgroundColor: Colors.red,
+                        ),
                       );
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('This Email Not Found')),
+                        SnackBar(
+                          content: Text(Provider.of<LanguageProvider>(context,
+                                          listen: false)
+                                      .locale
+                                      .languageCode ==
+                                  'ar'
+                              ? 'البريد الإلكتروني غير موجود'
+                              : 'This Email Not Found'),
+                          backgroundColor: Colors.red,
+                        ),
                       );
                     }
                   },
-                  child: Text('Reset Password',
-                      style: TextStyle(color: Colors.white, fontSize: 16)),
+                  child: Text(
+                    Provider.of<LanguageProvider>(context, listen: false)
+                                .locale
+                                .languageCode ==
+                            'ar'
+                        ? 'إعادة تعيين كلمة المرور'
+                        : 'Reset Password',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
                 ),
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Remember your password? "),
+                    Text(
+                      Provider.of<LanguageProvider>(context, listen: false)
+                                  .locale
+                                  .languageCode ==
+                              'ar'
+                          ? 'تتذكر كلمة المرور؟'
+                          : 'Remember your password? ',
+                    ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pop(context); // العودة إلى شاشة تسجيل الدخول
+                        Navigator.pop(context); // Go back to login screen
                       },
-                      child: Text("Login",
-                          style: TextStyle(
-                              color: Colors.deepPurple,
-                              fontWeight: FontWeight.bold)),
+                      child: Text(
+                        Provider.of<LanguageProvider>(context, listen: false)
+                                    .locale
+                                    .languageCode ==
+                                'ar'
+                            ? 'تسجيل الدخول'
+                            : 'Login',
+                        style: TextStyle(
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
@@ -91,7 +154,7 @@ class ForgetPasswordScreen extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           prefixIcon: Icon(icon, color: Colors.deepPurple),
-          hintText: hintText,
+          hintText: hintText, // Dynamic hintText
           filled: true,
           fillColor: Colors.deepPurple.shade50,
           border: OutlineInputBorder(
