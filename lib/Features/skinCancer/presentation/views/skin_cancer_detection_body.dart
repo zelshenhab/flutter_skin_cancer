@@ -64,7 +64,6 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
 
     // If image cropping is successful
     if (croppedFile != null) {
-      // Load the cropped image using the 'image' package
       final img.Image image =
           img.decodeImage(File(croppedFile.path).readAsBytesSync())!;
 
