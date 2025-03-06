@@ -46,7 +46,8 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
           _showResponseBox = true;
           _responseText = getTranslatedText(
               "تم اختيار الصورة! جاري المعالجة...",
-              "Image selected! Processing...");
+              "Image selected! Processing...",
+              "Изображение выбрано! Обработка...");
         });
         // Send image to Flask API
 
@@ -67,13 +68,15 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: getTranslatedText('قص الصورة', 'Crop Image'),
+          toolbarTitle: getTranslatedText(
+              'قص الصورة', 'Crop Image', 'Обрезать изображение'),
           toolbarColor: Colors.deepPurple,
           toolbarWidgetColor: Colors.white,
           lockAspectRatio: false,
         ),
         IOSUiSettings(
-          title: getTranslatedText('قص الصورة', 'Crop Image'),
+          title: getTranslatedText(
+              'قص الصورة', 'Crop Image', 'Обрезать изображение'),
         ),
       ],
     );
@@ -118,32 +121,44 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
           if (classification == "Malignant") {
             _responseText = getTranslatedText(
                 "⚠️ خبيث - يرجى استشارة الطبيب فورًا!",
-                "⚠️ Malignant - Please consult a doctor immediately!");
+                "⚠️ Malignant - Please consult a doctor immediately!",
+                "⚠️ Злокачественная опухоль — немедленно обратитесь к врачу!");
           } else {
             _responseText = getTranslatedText(
-                "✅ حميد - لا يوجد خطر.", "✅ Benign - No risk detected.");
+                "✅ حميد - لا يوجد خطر.",
+                "✅ Benign - No risk detected.",
+                "✅ Доброкачественная опухоль - угрозы нет.");
           }
 
           _responseText +=
-              "\n${getTranslatedText("نسبة الثقة: ", "Confidence: ")}${(confidence * 100).toStringAsFixed(2)}%";
+              "\n${getTranslatedText("نسبة الثقة: ", "Confidence: ", "Уровень уверенности: ")}${(confidence * 100).toStringAsFixed(2)}%";
         });
       } else {
         setState(() {
-          _responseText = getTranslatedText("❌ خطأ: ${response.reasonPhrase}",
-              "❌ Error: ${response.reasonPhrase}");
+          _responseText = getTranslatedText(
+              "❌ خطأ: ${response.reasonPhrase}",
+              "❌ Error: ${response.reasonPhrase}",
+              "❌ Ошибка: ${response.reasonPhrase}");
         });
       }
     } catch (e) {
       setState(() {
         _responseText = getTranslatedText(
             "❌ فشل الاتصال بالخادم. تأكد من أنه يعمل.",
-            "❌ Failed to connect to the server. Make sure it is running.");
+            "❌ Failed to connect to the server. Make sure it is running.",
+            "❌ Не удалось подключиться к серверу. Убедитесь, что он работает.");
       });
     }
   }
 
-  String getTranslatedText(String arText, String enText) {
-    return languageCode == 'ar' ? arText : enText;
+  String getTranslatedText(String arText, String enText, String ruText) {
+    if (languageCode == 'ar') {
+      return arText;
+    } else if (languageCode == 'ru') {
+      return ruText;
+    } else {
+      return enText;
+    }
   }
 
   @override
@@ -154,8 +169,8 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
         children: <Widget>[
           _image == null
               ? Text(
-                  getTranslatedText(
-                      'لم يتم اختيار صورة.', 'No image selected.'),
+                  getTranslatedText('لم يتم اختيار صورة.', 'No image selected.',
+                      'Изображение не выбрано.'),
                   style: const TextStyle(fontSize: 24),
                 )
               : Image.file(_image!),
@@ -177,7 +192,8 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
                 ],
               ),
               child: Text(
-                getTranslatedText('اختر صورة', 'Select Image'),
+                getTranslatedText(
+                    'اختر صورة', 'Select Image', 'Выбрать изображение'),
                 style: const TextStyle(
                   color: Color.fromARGB(255, 134, 50, 219),
                   fontSize: 18,
@@ -216,7 +232,7 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
             children: <Widget>[
               ListTile(
                 leading: const Icon(Icons.photo_library),
-                title: Text(getTranslatedText('المعرض', 'Gallery')),
+                title: Text(getTranslatedText('المعرض', 'Gallery', 'Галерея')),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage(ImageSource.gallery);
@@ -224,7 +240,7 @@ class _SkinCancerDetectionBodyState extends State<SkinCancerDetectionBody> {
               ),
               ListTile(
                 leading: const Icon(Icons.camera_alt),
-                title: Text(getTranslatedText('الكاميرا', 'Camera')),
+                title: Text(getTranslatedText('الكاميرا', 'Camera', 'Камера')),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage(ImageSource.camera);

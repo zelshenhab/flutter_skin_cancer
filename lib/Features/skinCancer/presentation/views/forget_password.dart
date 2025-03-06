@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_skin_cancer/core/localization/language_provider.dart';
-import 'package:provider/provider.dart'; // Don't forget to import provider
 
 class ForgetPasswordScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -10,6 +10,8 @@ class ForgetPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LanguageProvider>();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -18,120 +20,78 @@ class ForgetPasswordScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Text for forgot password, language dependent
                 Text(
-                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
-                      ? 'هل نسيت كلمة المرور؟'
-                      : 'Forgot password?',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  lang.getLocalizedString('forgotPasswordTitle'),
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 5),
-                // Text for instruction, language dependent
+                const SizedBox(height: 5),
                 Text(
-                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
-                      ? 'أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور'
-                      : 'Enter your email to reset your password',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                  lang.getLocalizedString('forgotPasswordInstruction'),
+                  style: const TextStyle(fontSize: 16, color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 20),
-                // TextField for email with dynamic hintText
+                const SizedBox(height: 20),
                 _buildTextField(
                   emailController,
-                  context.watch<LanguageProvider>().locale.languageCode == 'ar'
-                      ? 'البريد الإلكتروني'
-                      : 'Email',
+                  lang.getLocalizedString('email'),
                   Icons.email,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurple,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 100, vertical: 15),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                   ),
                   onPressed: () async {
-                    if (emailController.text == '') {
+                    if (emailController.text.trim().isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(Provider.of<LanguageProvider>(context,
-                                          listen: false)
-                                      .locale
-                                      .languageCode ==
-                                  'ar'
-                              ? 'من فضلك أدخل بريدك الإلكتروني'
-                              : 'Please Enter Your Email'),
+                          content:
+                              Text(lang.getLocalizedString('pleaseEnterEmail')),
                           backgroundColor: Colors.red,
                         ),
                       );
                       return;
                     }
                     try {
-                      await FirebaseAuth.instance
-                          .sendPasswordResetEmail(email: emailController.text);
+                      await FirebaseAuth.instance.sendPasswordResetEmail(
+                          email: emailController.text.trim());
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(Provider.of<LanguageProvider>(context,
-                                          listen: false)
-                                      .locale
-                                      .languageCode ==
-                                  'ar'
-                              ? 'تم إرسال رابط إعادة التعيين إلى البريد الإلكتروني'
-                              : 'Reset link sent to email'),
-                          backgroundColor: Colors.red,
+                          content:
+                              Text(lang.getLocalizedString('resetLinkSent')),
+                          backgroundColor: Colors.green,
                         ),
                       );
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(Provider.of<LanguageProvider>(context,
-                                          listen: false)
-                                      .locale
-                                      .languageCode ==
-                                  'ar'
-                              ? 'البريد الإلكتروني غير موجود'
-                              : 'This Email Not Found'),
+                          content:
+                              Text(lang.getLocalizedString('emailNotFound')),
                           backgroundColor: Colors.red,
                         ),
                       );
                     }
                   },
                   child: Text(
-                    Provider.of<LanguageProvider>(context, listen: false)
-                                .locale
-                                .languageCode ==
-                            'ar'
-                        ? 'إعادة تعيين كلمة المرور'
-                        : 'Reset Password',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    lang.getLocalizedString('resetPassword'),
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      Provider.of<LanguageProvider>(context, listen: false)
-                                  .locale
-                                  .languageCode ==
-                              'ar'
-                          ? 'تتذكر كلمة المرور؟'
-                          : 'Remember your password? ',
-                    ),
+                    Text(lang.getLocalizedString('rememberPassword')),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context); // Go back to login screen
-                      },
+                      onTap: () => Navigator.pop(context),
                       child: Text(
-                        Provider.of<LanguageProvider>(context, listen: false)
-                                    .locale
-                                    .languageCode ==
-                                'ar'
-                            ? 'تسجيل الدخول'
-                            : 'Login',
-                        style: TextStyle(
+                        lang.getLocalizedString('login'),
+                        style: const TextStyle(
                             color: Colors.deepPurple,
                             fontWeight: FontWeight.bold),
                       ),
@@ -154,7 +114,7 @@ class ForgetPasswordScreen extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           prefixIcon: Icon(icon, color: Colors.deepPurple),
-          hintText: hintText, // Dynamic hintText
+          hintText: hintText,
           filled: true,
           fillColor: Colors.deepPurple.shade50,
           border: OutlineInputBorder(
