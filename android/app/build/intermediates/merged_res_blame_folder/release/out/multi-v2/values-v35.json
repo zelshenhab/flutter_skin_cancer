@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.flutter_skin_cancer.app-mergeReleaseResources-56:/values-v35/values-v35.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Asus\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\image_cropper-8.1.0\\android\\build\\intermediates\\packaged_res\\release\\values-v35\\values-v35.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "216"
+                    }
+                }
+            ]
+        }
+    ]
+}

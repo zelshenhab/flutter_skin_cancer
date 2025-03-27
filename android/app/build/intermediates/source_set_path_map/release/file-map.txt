@@ -1,0 +1,62 @@
+com.example.flutter_skin_cancer.app-jetified-play-services-auth-21.0.0-0 C:\Users\Asus\.gradle\caches\transforms-3\0575b117166e4431290560056c17f207\transformed\jetified-play-services-auth-21.0.0\res
+com.example.flutter_skin_cancer.app-jetified-savedstate-1.2.1-1 C:\Users\Asus\.gradle\caches\transforms-3\0800811f8300c47ed7469315f9cbb29e\transformed\jetified-savedstate-1.2.1\res
+com.example.flutter_skin_cancer.app-fragment-1.7.1-2 C:\Users\Asus\.gradle\caches\transforms-3\0db396cf8d8edb04e728a7f327e293bf\transformed\fragment-1.7.1\res
+com.example.flutter_skin_cancer.app-core-runtime-2.2.0-3 C:\Users\Asus\.gradle\caches\transforms-3\1b8455932e5b15f898cb80b7deea290e\transformed\core-runtime-2.2.0\res
+com.example.flutter_skin_cancer.app-jetified-fragment-ktx-1.7.1-4 C:\Users\Asus\.gradle\caches\transforms-3\244d412f6f68e4f6569dc80b384a033b\transformed\jetified-fragment-ktx-1.7.1\res
+com.example.flutter_skin_cancer.app-jetified-play-services-base-18.1.0-5 C:\Users\Asus\.gradle\caches\transforms-3\24f7b03310910cf4c77ba83b1e3916a8\transformed\jetified-play-services-base-18.1.0\res
+com.example.flutter_skin_cancer.app-jetified-firebase-messaging-24.1.0-6 C:\Users\Asus\.gradle\caches\transforms-3\29a53f7fb58a82af089af25d15510fc1\transformed\jetified-firebase-messaging-24.1.0\res
+com.example.flutter_skin_cancer.app-jetified-window-1.2.0-7 C:\Users\Asus\.gradle\caches\transforms-3\2a5cb50743af267f791155f758929522\transformed\jetified-window-1.2.0\res
+com.example.flutter_skin_cancer.app-jetified-core-common-2.0.3-8 C:\Users\Asus\.gradle\caches\transforms-3\3090d10f0bf8e4a1de490e143c6b6d89\transformed\jetified-core-common-2.0.3\res
+com.example.flutter_skin_cancer.app-preference-1.2.1-9 C:\Users\Asus\.gradle\caches\transforms-3\3428e6e37da63717e7dc43737ee0aaf3\transformed\preference-1.2.1\res
+com.example.flutter_skin_cancer.app-jetified-credentials-1.2.0-rc01-10 C:\Users\Asus\.gradle\caches\transforms-3\36a804324879a019969b7e7b3cf135c1\transformed\jetified-credentials-1.2.0-rc01\res
+com.example.flutter_skin_cancer.app-slidingpanelayout-1.2.0-11 C:\Users\Asus\.gradle\caches\transforms-3\3b4e47743b85542183613507865a9ee9\transformed\slidingpanelayout-1.2.0\res
+com.example.flutter_skin_cancer.app-jetified-play-services-basement-18.4.0-12 C:\Users\Asus\.gradle\caches\transforms-3\3be65826ec870343de2f98a652fbbd96\transformed\jetified-play-services-basement-18.4.0\res
+com.example.flutter_skin_cancer.app-jetified-ucrop-2.2.10-13 C:\Users\Asus\.gradle\caches\transforms-3\4075e9abcb7ce62a82acfd8b80bc2fa7\transformed\jetified-ucrop-2.2.10\res
+com.example.flutter_skin_cancer.app-jetified-lifecycle-viewmodel-savedstate-2.7.0-14 C:\Users\Asus\.gradle\caches\transforms-3\418d6d12027f2fe1cb2216924ee02d62\transformed\jetified-lifecycle-viewmodel-savedstate-2.7.0\res
+com.example.flutter_skin_cancer.app-transition-1.4.1-15 C:\Users\Asus\.gradle\caches\transforms-3\42e2352763a2f7f8764c5ac783cdca90\transformed\transition-1.4.1\res
+com.example.flutter_skin_cancer.app-jetified-lifecycle-viewmodel-ktx-2.7.0-16 C:\Users\Asus\.gradle\caches\transforms-3\4b5518a6c98592dfa44ca363256cceee\transformed\jetified-lifecycle-viewmodel-ktx-2.7.0\res
+com.example.flutter_skin_cancer.app-jetified-lifecycle-process-2.7.0-17 C:\Users\Asus\.gradle\caches\transforms-3\4f6a00e63888ab217676bfbca9679dd2\transformed\jetified-lifecycle-process-2.7.0\res
+com.example.flutter_skin_cancer.app-jetified-profileinstaller-1.3.1-18 C:\Users\Asus\.gradle\caches\transforms-3\56d4d05d0553c07b571e1ceed2d748ef\transformed\jetified-profileinstaller-1.3.1\res
+com.example.flutter_skin_cancer.app-jetified-activity-ktx-1.9.3-19 C:\Users\Asus\.gradle\caches\transforms-3\5c90b121cbbec67fb15abdb7ea8c824d\transformed\jetified-activity-ktx-1.9.3\res
+com.example.flutter_skin_cancer.app-jetified-firebase-common-21.0.0-20 C:\Users\Asus\.gradle\caches\transforms-3\5d2d441308f90c8f5b9bf4c804125433\transformed\jetified-firebase-common-21.0.0\res
+com.example.flutter_skin_cancer.app-recyclerview-1.0.0-21 C:\Users\Asus\.gradle\caches\transforms-3\68cf88e04e0165e5c6b8a74a7769a298\transformed\recyclerview-1.0.0\res
+com.example.flutter_skin_cancer.app-jetified-tracing-1.2.0-22 C:\Users\Asus\.gradle\caches\transforms-3\6a3b183b5925e71cf135cbafcfe76144\transformed\jetified-tracing-1.2.0\res
+com.example.flutter_skin_cancer.app-lifecycle-runtime-2.7.0-23 C:\Users\Asus\.gradle\caches\transforms-3\74b6ff0b34b7f59eb6d56e86d4a666d3\transformed\lifecycle-runtime-2.7.0\res
+com.example.flutter_skin_cancer.app-jetified-lifecycle-livedata-core-ktx-2.7.0-24 C:\Users\Asus\.gradle\caches\transforms-3\74ea506b3655a68ca521eec9bac0b94a\transformed\jetified-lifecycle-livedata-core-ktx-2.7.0\res
+com.example.flutter_skin_cancer.app-core-1.13.1-25 C:\Users\Asus\.gradle\caches\transforms-3\779c2302ed954473939605f6577aa967\transformed\core-1.13.1\res
+com.example.flutter_skin_cancer.app-jetified-credentials-play-services-auth-1.2.0-rc01-26 C:\Users\Asus\.gradle\caches\transforms-3\86a40529a5f6c931652358a4f9409499\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\res
+com.example.flutter_skin_cancer.app-browser-1.4.0-27 C:\Users\Asus\.gradle\caches\transforms-3\9049faf35c5048a57891b9950c366657\transformed\browser-1.4.0\res
+com.example.flutter_skin_cancer.app-jetified-activity-1.9.3-28 C:\Users\Asus\.gradle\caches\transforms-3\92826927b3dc4e4f7f0728735bc749d4\transformed\jetified-activity-1.9.3\res
+com.example.flutter_skin_cancer.app-appcompat-1.6.1-29 C:\Users\Asus\.gradle\caches\transforms-3\9679cc919b2bb060c199425c93f06bc5\transformed\appcompat-1.6.1\res
+com.example.flutter_skin_cancer.app-lifecycle-viewmodel-2.7.0-30 C:\Users\Asus\.gradle\caches\transforms-3\9cdc7a645250ecfa71c110fee9cdfbd4\transformed\lifecycle-viewmodel-2.7.0\res
+com.example.flutter_skin_cancer.app-coordinatorlayout-1.0.0-31 C:\Users\Asus\.gradle\caches\transforms-3\abb78d7d1fada22a661cf0090f7340c3\transformed\coordinatorlayout-1.0.0\res
+com.example.flutter_skin_cancer.app-jetified-lifecycle-runtime-ktx-2.7.0-32 C:\Users\Asus\.gradle\caches\transforms-3\bebf63210e570040b499416a0be1d163\transformed\jetified-lifecycle-runtime-ktx-2.7.0\res
+com.example.flutter_skin_cancer.app-jetified-appcompat-resources-1.6.1-33 C:\Users\Asus\.gradle\caches\transforms-3\c1175940490a5f70830a20d4355fd8f6\transformed\jetified-appcompat-resources-1.6.1\res
+com.example.flutter_skin_cancer.app-localbroadcastmanager-1.1.0-34 C:\Users\Asus\.gradle\caches\transforms-3\cb19b18ceb8bcf0808555d69573c095d\transformed\localbroadcastmanager-1.1.0\res
+com.example.flutter_skin_cancer.app-jetified-window-java-1.2.0-35 C:\Users\Asus\.gradle\caches\transforms-3\cf5d493dfc333285889f87f08e227dc6\transformed\jetified-window-java-1.2.0\res
+com.example.flutter_skin_cancer.app-jetified-savedstate-ktx-1.2.1-36 C:\Users\Asus\.gradle\caches\transforms-3\d86e95a8686ce472e3478a78d4a7ec99\transformed\jetified-savedstate-ktx-1.2.1\res
+com.example.flutter_skin_cancer.app-jetified-core-1.0.0-37 C:\Users\Asus\.gradle\caches\transforms-3\da11b262ee7052527b3f5ccdca9e4bb9\transformed\jetified-core-1.0.0\res
+com.example.flutter_skin_cancer.app-jetified-core-ktx-1.13.1-38 C:\Users\Asus\.gradle\caches\transforms-3\eb19a60ca752168c5a5daab5f07584a2\transformed\jetified-core-ktx-1.13.1\res
+com.example.flutter_skin_cancer.app-jetified-startup-runtime-1.1.1-39 C:\Users\Asus\.gradle\caches\transforms-3\ef8e368f7fc46ff80c1612f066fc881c\transformed\jetified-startup-runtime-1.1.1\res
+com.example.flutter_skin_cancer.app-jetified-emoji2-views-helper-1.2.0-40 C:\Users\Asus\.gradle\caches\transforms-3\f6b2adf2cf00764055d46e8fb65cb983\transformed\jetified-emoji2-views-helper-1.2.0\res
+com.example.flutter_skin_cancer.app-jetified-annotation-experimental-1.4.0-41 C:\Users\Asus\.gradle\caches\transforms-3\f7055947ea27bb9563bbb21cdb9ef1f2\transformed\jetified-annotation-experimental-1.4.0\res
+com.example.flutter_skin_cancer.app-jetified-emoji2-1.2.0-42 C:\Users\Asus\.gradle\caches\transforms-3\f82788d64de997e1ad3068610ef82c80\transformed\jetified-emoji2-1.2.0\res
+com.example.flutter_skin_cancer.app-lifecycle-livedata-core-2.7.0-43 C:\Users\Asus\.gradle\caches\transforms-3\f8aa2b63bb4597bac673ef5085da1c68\transformed\lifecycle-livedata-core-2.7.0\res
+com.example.flutter_skin_cancer.app-packaged_res-44 C:\Users\Asus\AppData\Local\Pub\Cache\hosted\pub.dev\cloud_firestore-5.6.4\android\build\intermediates\packaged_res\release
+com.example.flutter_skin_cancer.app-packaged_res-45 C:\Users\Asus\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_auth-5.5.0\android\build\intermediates\packaged_res\release
+com.example.flutter_skin_cancer.app-packaged_res-46 C:\Users\Asus\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_core-3.12.1\android\build\intermediates\packaged_res\release
+com.example.flutter_skin_cancer.app-packaged_res-47 C:\Users\Asus\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\packaged_res\release
+com.example.flutter_skin_cancer.app-packaged_res-48 C:\Users\Asus\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_storage-12.4.3\android\build\intermediates\packaged_res\release
+com.example.flutter_skin_cancer.app-packaged_res-49 C:\Users\Asus\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_plugin_android_lifecycle-2.0.24\android\build\intermediates\packaged_res\release
+com.example.flutter_skin_cancer.app-packaged_res-50 C:\Users\Asus\AppData\Local\Pub\Cache\hosted\pub.dev\google_sign_in_android-6.1.35\android\build\intermediates\packaged_res\release
+com.example.flutter_skin_cancer.app-packaged_res-51 C:\Users\Asus\AppData\Local\Pub\Cache\hosted\pub.dev\image_cropper-8.1.0\android\build\intermediates\packaged_res\release
+com.example.flutter_skin_cancer.app-packaged_res-52 C:\Users\Asus\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+20\android\build\intermediates\packaged_res\release
+com.example.flutter_skin_cancer.app-google-services-53 C:\Users\Asus\Desktop\Flutter\Projects\Flutter 17\flutter_skin_cancer\android\app\build\generated\res\google-services\release
+com.example.flutter_skin_cancer.app-pngs-54 C:\Users\Asus\Desktop\Flutter\Projects\Flutter 17\flutter_skin_cancer\android\app\build\generated\res\pngs\release
+com.example.flutter_skin_cancer.app-resValues-55 C:\Users\Asus\Desktop\Flutter\Projects\Flutter 17\flutter_skin_cancer\android\app\build\generated\res\resValues\release
+com.example.flutter_skin_cancer.app-packageReleaseResources-56 C:\Users\Asus\Desktop\Flutter\Projects\Flutter 17\flutter_skin_cancer\android\app\build\intermediates\incremental\release\packageReleaseResources\merged.dir
+com.example.flutter_skin_cancer.app-packageReleaseResources-57 C:\Users\Asus\Desktop\Flutter\Projects\Flutter 17\flutter_skin_cancer\android\app\build\intermediates\incremental\release\packageReleaseResources\stripped.dir
+com.example.flutter_skin_cancer.app-merged-not-compiled-resources-58 C:\Users\Asus\Desktop\Flutter\Projects\Flutter 17\flutter_skin_cancer\android\app\build\intermediates\merged-not-compiled-resources\release
+com.example.flutter_skin_cancer.app-merged_res-59 C:\Users\Asus\Desktop\Flutter\Projects\Flutter 17\flutter_skin_cancer\android\app\build\intermediates\merged_res\release
+com.example.flutter_skin_cancer.app-main-60 C:\Users\Asus\Desktop\Flutter\Projects\Flutter 17\flutter_skin_cancer\android\app\src\main\res
+com.example.flutter_skin_cancer.app-release-61 C:\Users\Asus\Desktop\Flutter\Projects\Flutter 17\flutter_skin_cancer\android\app\src\release\res
