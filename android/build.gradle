@@ -1,25 +1,34 @@
 buildscript {
-    ext.kotlin_version = '1.9.22' // إصدار كوتلين إذا كنت تستخدمه
-    
     repositories {
-        google()
-        mavenCentral()
+        google()  // استخدام مستودع Google
+        mavenCentral()  // استخدام مستودع Maven Central
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.2.1' // تحديث إصدار Android Gradle Plugin
-        classpath 'com.google.gms:google-services:4.3.15' // لإدماج خدمات Firebase
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // إذا كنت تستخدم Kotlin
+        // تحديث إصدار AGP إلى النسخة 8.2.1 أو الأحدث
+        classpath 'com.android.tools.build:gradle:8.2.1'
+
+        // إذا كنت بحاجة إلى خدمات جوجل، تأكد من تحديثها إلى النسخة الأحدث
+        classpath 'com.google.gms:google-services:4.4.1'
     }
 }
 
 allprojects {
     repositories {
-        google()
-        mavenCentral()
+        google()  // استخدام مستودع Google
+        mavenCentral()  // استخدام مستودع Maven Central
     }
 }
 
-tasks.register('clean', Delete) {
-    delete rootProject.buildDir
+rootProject.buildDir = "../build"  // تحديد مسار البناء الجذري للمشروع
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir  // تنفيذ عملية التنظيف
 }

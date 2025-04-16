@@ -50,7 +50,6 @@ class _SkinCancerState extends State<SkinCancer> {
             supportedLocales: [
               Locale('en', 'US'),
               Locale('ar', 'AE'),
-              Locale('ru', 'RU'), // إضافة اللغة الروسية
             ],
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
@@ -61,9 +60,7 @@ class _SkinCancerState extends State<SkinCancer> {
               // تحديد اتجاه النص بناءً على اللغة
               textDirection: languageProvider.locale.languageCode == 'ar'
                   ? TextDirection.rtl // العربية من اليمين لليسار
-                  : languageProvider.locale.languageCode == 'ru'
-                      ? TextDirection.ltr // الروسية من اليسار لليمين
-                      : TextDirection.ltr, // الإنجليزية من اليسار لليمين
+                  : TextDirection.ltr, // الإنجليزية من اليسار لليمين
               child: SignUpScreen(),
             ),
             routes: {
@@ -77,12 +74,6 @@ class _SkinCancerState extends State<SkinCancer> {
 }
 
 
-
 //  home: FirebaseAuth.instance.currentUser == null
 //           ? SignUpScreen()
 //           : SkinCancerDetectionView(),
-
-
-//  child: FirebaseAuth.instance.currentUser == null
-//                   ? SignUpScreen() // إذا لم يكن المستخدم مسجلاً الدخول
-//                   : SkinCancerDetectionView(), // إذا كان المستخدم مسجلاً الدخول

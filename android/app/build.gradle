@@ -1,42 +1,45 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
-    id "com.google.gms.google-services"  // تأكد من أن هذا السطر في النهاية
+    id "com.google.gms.google-services"  // Firebase plugin
 }
 
 android {
-    namespace "com.example.flutter_skin_cancer"
-    compileSdkVersion 35  // تأكد من تحديث هذا الرقم إلى أحدث إصدار متاح
+    namespace = "com.example.flutter_skin_cancer"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
-        applicationId "com.example.flutter_skin_cancer"
-        minSdkVersion 23  // تأكد من أن الحد الأدنى يتوافق مع Firebase
-        targetSdkVersion 35
-        versionCode 1
-        versionName "1.0"
+        applicationId = "com.example.flutter_skin_cancer"
+        
+        // ✅ Manually set minSdkVersion to 23 for Firebase compatibility
+        minSdkVersion 23  
+        
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutter.versionCode
+        versionName flutter.versionName
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.debug // استخدم توقيعاً مخصصاً للإصدارات الفعلية
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig = signingConfigs.debug
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 }
 
 flutter {
-    source "../.."
-}
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10"
+    source = "../.."
 }
